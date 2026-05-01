@@ -1,4 +1,3 @@
-import { TypeModeProvider } from './contexts/TypeModeContext.jsx'
 import { NavBar } from './sections/NavBar.jsx'
 import { HeroSection } from './sections/HeroSection.jsx'
 import { ColorsSection } from './sections/ColorsSection.jsx'
@@ -9,7 +8,7 @@ import { FooterSection } from './sections/FooterSection.jsx'
 
 export default function App() {
   return (
-    <TypeModeProvider>
+    <>
       {/* Noise texture overlay for depth/atmosphere */}
       <div className="noise-overlay" aria-hidden="true" />
 
@@ -24,6 +23,6 @@ export default function App() {
       </main>
 
       <FooterSection />
-    </TypeModeProvider>
+    </>
   )
 }
