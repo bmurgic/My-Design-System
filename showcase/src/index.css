@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* ─── Dank Mono (user's paid font — drop files in public/fonts/DankMono/) ─── */
+@font-face {
+  font-family: 'Dank Mono';
+  src: url('/fonts/DankMono/DankMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dank Mono';
+  src: url('/fonts/DankMono/DankMono-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dank Mono';
+  src: url('/fonts/DankMono/DankMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── BM Design System Token System ─── */
+@theme {
+  --font-primary: 'Figtree', 'DM Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'Dank Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+
+  --color-accent: #f59e0b;
+  --color-accent-link: #fbbf24;
+  --color-bg-page: #171717;
+  --color-bg-card: #1e1e1e;
+  --color-bg-elevated: #252525;
+  --color-bg-button: #0f0f0f;
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #b4b4b4;
+  --color-text-muted: #898989;
+  --color-border-subtle: #242424;
+  --color-border-standard: #2e2e2e;
+  --color-border-prominent: #363636;
+  --color-border-heavy: #393939;
+  --color-error: #f87171;
+  --color-warning: #fbbf24;
+  --color-success: #34d399;
+  --color-info: #60a5fa;
+
+  --spacing-section: 96px;
+  --spacing-section-lg: 128px;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+}
+
+/* ─── CSS custom properties ─── */
+:root {
+  --color-accent: #f59e0b;
+  --color-accent-link: #fbbf24;
+  --color-accent-border: rgba(245, 158, 11, 0.3);
+  --color-bg-page: #171717;
+  --color-bg-card: #1e1e1e;
+  --color-bg-elevated: #252525;
+  --color-bg-button: #0f0f0f;
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #b4b4b4;
+  --color-text-muted: #898989;
+  --color-border-subtle: #242424;
+  --color-border-standard: #2e2e2e;
+  --color-border-prominent: #363636;
+  --color-border-heavy: #393939;
+  --color-error: #f87171;
+  --color-warning: #fbbf24;
+  --color-success: #34d399;
+  --color-info: #60a5fa;
+  --font-primary: 'Figtree', 'DM Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'Dank Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+
+  /* shadcn/ui variable overrides — mapped to BM tokens */
+  --background: 23 23 23;
+  --foreground: 250 250 250;
+  --card: 30 30 30;
+  --card-foreground: 250 250 250;
+  --popover: 37 37 37;
+  --popover-foreground: 250 250 250;
+  --primary: 250 250 250;
+  --primary-foreground: 23 23 23;
+  --secondary: 36 36 36;
+  --secondary-foreground: 250 250 250;
+  --muted: 36 36 36;
+  --muted-foreground: 137 137 137;
+  --accent: 245 158 11;
+  --accent-foreground: 23 23 23;
+  --destructive: 248 113 113;
+  --border: 46 46 46;
+  --input: 46 46 46;
+  --ring: 245 158 11;
+  --radius: 8px;
+}
+
+/* ─── Base resets ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-primary);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Skip link (a11y) ─── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--color-accent);
+  color: var(--color-bg-page);
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ─── Focus rings ─── */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─── Section reveal animation ─── */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.section-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ─── Interactive elements ─── */
+button, [role="button"] {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button {
+  min-height: 44px;
+}
+
+code, .code {
+  font-family: var(--font-mono);
+}
