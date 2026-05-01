@@ -1,92 +1,89 @@
 import { useIntersectionReveal } from '@/hooks/useIntersectionReveal'
-import { useTypeMode } from '@/contexts/TypeModeContext.jsx'
 import { SectionLabel, SectionTitle } from './shared'
 
-function buildTypeRoles(tokens) {
-  return [
-    {
-      role: 'Display',
-      sample: 'Every detail matters.',
-      size: '48px',
-      weight: tokens.display.weight,
-      letterSpacing: tokens.display.letterSpacing,
-      lineHeight: '1.05',
-      font: 'var(--font-primary)',
-      meta: `Figtree · 48px · ${tokens.display.weight} · lh 1.05`,
-    },
-    {
-      role: 'H1',
-      sample: 'Design systems at scale.',
-      size: '36px',
-      weight: tokens.h1.weight,
-      letterSpacing: tokens.h1.letterSpacing,
-      lineHeight: '1.1',
-      font: 'var(--font-primary)',
-      meta: `Figtree · 36px · ${tokens.h1.weight} · lh 1.10`,
-    },
-    {
-      role: 'H2',
-      sample: 'Token-driven components.',
-      size: '28px',
-      weight: tokens.h2.weight,
-      letterSpacing: tokens.h2.letterSpacing,
-      lineHeight: '1.2',
-      font: 'var(--font-primary)',
-      meta: `Figtree · 28px · ${tokens.h2.weight} · lh 1.20`,
-    },
-    {
-      role: 'H3',
-      sample: 'Consistency by default.',
-      size: '22px',
-      weight: tokens.h3.weight,
-      letterSpacing: tokens.h3.letterSpacing,
-      lineHeight: '1.25',
-      font: 'var(--font-primary)',
-      meta: `Figtree · 22px · ${tokens.h3.weight} · lh 1.25`,
-    },
-    {
-      role: 'Body Large',
-      sample: 'Dark-mode native. Warm amber accent. Precise, personal, no-shadow depth.',
-      size: '17px',
-      weight: 400,
-      letterSpacing: 'normal',
-      lineHeight: '1.6',
-      font: 'var(--font-primary)',
-      meta: 'Figtree · 17px · 400 · lh 1.60',
-    },
-    {
-      role: 'Body',
-      sample: 'The base reading size. Comfortable at any density on any device.',
-      size: '15px',
-      weight: 400,
-      letterSpacing: 'normal',
-      lineHeight: '1.55',
-      font: 'var(--font-primary)',
-      meta: 'Figtree · 15px · 400 · lh 1.55',
-    },
-    {
-      role: 'Small / Caption',
-      sample: 'Supporting text, timestamps, helper copy.',
-      size: '13px',
-      weight: 400,
-      letterSpacing: 'normal',
-      lineHeight: '1.5',
-      font: 'var(--font-primary)',
-      meta: 'Figtree · 13px · 400 · lh 1.50',
-    },
-    {
-      role: 'Code Label',
-      sample: '--color-accent · TYPOGRAPHY · const TOKEN = value',
-      size: '12px',
-      weight: 400,
-      letterSpacing: 'normal',
-      lineHeight: '1.6',
-      font: 'var(--font-mono)',
-      meta: 'Dank Mono · 12px · 400 · lh 1.60',
-      isMono: true,
-    },
-  ]
-}
+const TYPE_ROLES = [
+  {
+    role: 'Display',
+    sample: 'Every detail matters.',
+    size: '48px',
+    weight: 400,
+    lineHeight: '1.05',
+    letterSpacing: '-0.02em',
+    font: 'var(--font-primary)',
+    meta: 'Figtree · 48px · 400 · lh 1.05',
+  },
+  {
+    role: 'H1',
+    sample: 'Design systems at scale.',
+    size: '36px',
+    weight: 400,
+    lineHeight: '1.1',
+    letterSpacing: '-0.02em',
+    font: 'var(--font-primary)',
+    meta: 'Figtree · 36px · 400 · lh 1.10',
+  },
+  {
+    role: 'H2',
+    sample: 'Token-driven components.',
+    size: '28px',
+    weight: 400,
+    lineHeight: '1.2',
+    letterSpacing: '-0.02em',
+    font: 'var(--font-primary)',
+    meta: 'Figtree · 28px · 400 · lh 1.20',
+  },
+  {
+    role: 'H3',
+    sample: 'Consistency by default.',
+    size: '22px',
+    weight: 500,
+    lineHeight: '1.25',
+    letterSpacing: '-0.01em',
+    font: 'var(--font-primary)',
+    meta: 'Figtree · 22px · 500 · lh 1.25',
+  },
+  {
+    role: 'Body Large',
+    sample: 'Dark-mode native. Warm amber accent. Precise, personal, no-shadow depth.',
+    size: '17px',
+    weight: 400,
+    lineHeight: '1.6',
+    letterSpacing: 'normal',
+    font: 'var(--font-primary)',
+    meta: 'Figtree · 17px · 400 · lh 1.60',
+  },
+  {
+    role: 'Body',
+    sample: 'The base reading size. Comfortable at any density on any device.',
+    size: '15px',
+    weight: 400,
+    lineHeight: '1.55',
+    letterSpacing: 'normal',
+    font: 'var(--font-primary)',
+    meta: 'Figtree · 15px · 400 · lh 1.55',
+  },
+  {
+    role: 'Small / Caption',
+    sample: 'Supporting text, timestamps, helper copy.',
+    size: '13px',
+    weight: 400,
+    lineHeight: '1.5',
+    letterSpacing: 'normal',
+    font: 'var(--font-primary)',
+    meta: 'Figtree · 13px · 400 · lh 1.50',
+  },
+  {
+    role: 'Code Label',
+    sample: '--color-accent · TYPOGRAPHY · const TOKEN = value',
+    size: '12px',
+    weight: 400,
+    lineHeight: '1.6',
+    letterSpacing: 'normal',
+    font: 'var(--font-mono)',
+    meta: 'Dank Mono · 12px · 400 · lh 1.60',
+    isMono: true,
+  },
+]
 
 function TypeRow({ role, sample, size, weight, letterSpacing, lineHeight, font, meta, isMono }) {
   return (
@@ -100,7 +97,6 @@ function TypeRow({ role, sample, size, weight, letterSpacing, lineHeight, font, 
         borderBottom: '1px solid var(--color-border-subtle)',
       }}
     >
-      {/* Role label */}
       <p style={{
         margin: 0,
         fontFamily: 'var(--font-mono)',
@@ -112,7 +108,6 @@ function TypeRow({ role, sample, size, weight, letterSpacing, lineHeight, font, 
         {role}
       </p>
 
-      {/* Live sample */}
       <p style={{
         margin: 0,
         fontFamily: font,
@@ -122,19 +117,16 @@ function TypeRow({ role, sample, size, weight, letterSpacing, lineHeight, font, 
         lineHeight,
         color: 'var(--color-text-primary)',
         fontStyle: isMono ? 'italic' : 'normal',
-        transition: 'font-weight 150ms ease, letter-spacing 150ms ease',
       }}>
         {sample}
       </p>
 
-      {/* Spec */}
       <p style={{
         margin: 0,
         fontFamily: 'var(--font-mono)',
         fontSize: '11px',
         color: 'var(--color-text-muted)',
         textAlign: 'right',
-        transition: 'opacity 150ms ease',
       }}>
         {meta}
       </p>
@@ -144,8 +136,6 @@ function TypeRow({ role, sample, size, weight, letterSpacing, lineHeight, font, 
 
 export function TypographySection() {
   const ref = useIntersectionReveal()
-  const { tokens } = useTypeMode()
-  const typeRoles = buildTypeRoles(tokens)
 
   return (
     <section
@@ -175,7 +165,6 @@ export function TypographySection() {
         </p>
 
         <div style={{ overflowX: 'auto' }}>
-          {/* Header row */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: '160px 1fr 200px',
@@ -198,7 +187,7 @@ export function TypographySection() {
             ))}
           </div>
 
-          {typeRoles.map(row => (
+          {TYPE_ROLES.map(row => (
             <TypeRow key={row.role} {...row} />
           ))}
         </div>
