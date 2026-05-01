@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTypeMode } from '@/contexts/TypeModeContext.jsx'
 
 const NAV_LINKS = [
   { href: '#colors', label: 'Colors' },
@@ -35,6 +36,7 @@ function LogoMark() {
 
 export function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { mode, toggleMode } = useTypeMode()
 
   function handleNavToggle() {
     setMenuOpen(prev => !prev)
@@ -124,6 +126,9 @@ export function NavBar() {
             </li>
           ))}
         </ul>
+
+        {/* Type mode toggle */}
+        <TypeModeToggle mode={mode} onToggle={toggleMode} />
 
         {/* CTA */}
         <a
@@ -223,5 +228,45 @@ export function NavBar() {
         }
       `}</style>
     </header>
+  )
+}
+
+function TypeModeToggle({ mode, onToggle }) {
+  const isProposed = mode === 'proposed'
+
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={`Switch to ${isProposed ? 'current' : 'proposed'} type mode`}
+      aria-pressed={isProposed}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.375rem',
+        flexShrink: 0,
+        backgroundColor: isProposed ? 'var(--color-accent)' : 'var(--color-bg-elevated)',
+        border: `1px solid ${isProposed ? 'var(--color-accent)' : 'var(--color-border-standard)'}`,
+        borderRadius: 'var(--radius-pill)',
+        padding: '0 0.875rem',
+        height: '32px',
+        minHeight: '44px',
+        cursor: 'pointer',
+        transition: 'background-color 150ms ease, border-color 150ms ease',
+        touchAction: 'manipulation',
+      }}
+    >
+      <span style={{
+        fontFamily: 'var(--font-mono)',
+        fontSize: '11px',
+        fontWeight: 400,
+        letterSpacing: '0.06em',
+        color: isProposed ? 'var(--color-bg-page)' : 'var(--color-text-muted)',
+        transition: 'color 150ms ease',
+        userSelect: 'none',
+      }}>
+        {isProposed ? 'proposed' : 'current'}
+      </span>
+    </button>
   )
 }
