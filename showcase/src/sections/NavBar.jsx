@@ -1,10 +1,10 @@
 import { useState } from 'react'
+import { NavLink, Link } from 'react-router'
 
 const NAV_LINKS = [
-  { href: '#colors', label: 'Colors' },
-  { href: '#typography', label: 'Typography' },
-  { href: '#buttons', label: 'Buttons' },
-  { href: '#cards', label: 'Cards' },
+  { to: '/', label: 'Design System', end: true },
+  { to: '/components', label: 'Components' },
+  { to: '/about', label: 'About' },
 ]
 
 function LogoMark() {
@@ -33,6 +33,24 @@ function LogoMark() {
   )
 }
 
+function navLinkStyle({ isActive }) {
+  return {
+    fontFamily: 'var(--font-primary)',
+    fontSize: '14px',
+    fontWeight: isActive ? 600 : 500,
+    color: isActive ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+    textDecoration: 'none',
+    transition: `color var(--duration-instant) var(--ease-out), border-color var(--duration-enter) var(--ease-out)`,
+    minHeight: '44px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    borderBottom: isActive
+      ? '1px solid var(--color-accent-link)'
+      : '1px solid transparent',
+    paddingTop: '2px',
+  }
+}
+
 export function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -40,12 +58,16 @@ export function NavBar() {
     setMenuOpen(prev => !prev)
   }
 
+  function handleMobileLinkClick() {
+    setMenuOpen(false)
+  }
+
   return (
     <header
       style={{
         position: 'sticky',
         top: 0,
-        zIndex: 50,
+        zIndex: 'var(--z-navbar)',
         backgroundColor: 'var(--color-bg-page)',
         borderBottom: '1px solid var(--color-border-subtle)',
       }}
@@ -64,8 +86,9 @@ export function NavBar() {
         }}
       >
         {/* Logo */}
-        <a
-          href="#"
+        <Link
+          to="/"
+          aria-label="BM home"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -86,7 +109,7 @@ export function NavBar() {
           >
             BM
           </span>
-        </a>
+        </Link>
 
         {/* Desktop nav links */}
         <ul
@@ -102,52 +125,38 @@ export function NavBar() {
           className="hidden-mobile"
         >
           {NAV_LINKS.map(link => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontSize: '14px',
-                  fontWeight: 500,
-                  color: 'var(--color-text-primary)',
-                  textDecoration: 'none',
-                  transition: 'color 0.15s ease',
-                  minHeight: '44px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                }}
-                onMouseEnter={e => { e.target.style.color = 'var(--color-text-muted)' }}
-                onMouseLeave={e => { e.target.style.color = 'var(--color-text-primary)' }}
-              >
+            <li key={link.to}>
+              <NavLink to={link.to} end={link.end} style={navLinkStyle}>
                 {link.label}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
 
         {/* CTA */}
-        <a
-          href="#colors"
+        <Link
+          to="/components"
           style={{
             fontFamily: 'var(--font-primary)',
-            fontSize: '14px',
+            fontSize: '13px',
             fontWeight: 500,
             color: 'var(--color-text-primary)',
             textDecoration: 'none',
             border: '1px solid var(--color-border-prominent)',
             borderRadius: 'var(--radius-pill)',
-            padding: '0 1.25rem',
-            height: '36px',
+            padding: '0 0.875rem',
+            height: '32px',
             display: 'inline-flex',
             alignItems: 'center',
             flexShrink: 0,
-            transition: 'border-color 0.15s ease',
+            transition: 'border-color var(--duration-enter) var(--ease-out)',
           }}
+          className="hidden-mobile"
           onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--color-text-muted)' }}
           onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--color-border-prominent)' }}
         >
-          View tokens
-        </a>
+          View components
+        </Link>
 
         {/* Mobile menu button */}
         <button
@@ -189,26 +198,39 @@ export function NavBar() {
             padding: '1rem 1.5rem',
           }}
         >
-          <ul role="list" style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+          <ul
+            role="list"
+            style={{
+              listStyle: 'none',
+              margin: 0,
+              padding: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.25rem',
+            }}
+          >
             {NAV_LINKS.map(link => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  style={{
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  end={link.end}
+                  onClick={handleMobileLinkClick}
+                  style={({ isActive }) => ({
                     fontFamily: 'var(--font-primary)',
                     fontSize: '15px',
-                    fontWeight: 500,
-                    color: 'var(--color-text-primary)',
+                    fontWeight: isActive ? 600 : 500,
+                    color: isActive
+                      ? 'var(--color-accent-link)'
+                      : 'var(--color-text-primary)',
                     textDecoration: 'none',
                     display: 'flex',
                     padding: '0.75rem 0',
                     minHeight: '44px',
                     alignItems: 'center',
-                  }}
+                  })}
                 >
                   {link.label}
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>

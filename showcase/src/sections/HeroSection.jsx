@@ -73,25 +73,37 @@ export function HeroSection() {
 }
 
 function PrimaryPillButton({ href, children }) {
+  const BG_DEFAULT = 'var(--color-accent-deep)'
+  const BG_HOVER = 'color-mix(in srgb, var(--color-accent) 50%, transparent)'
+  const BORDER_DEFAULT = 'color-mix(in srgb, var(--color-accent) 30%, transparent)'
+  const BORDER_HOVER = 'var(--color-accent)'
+
   return (
     <a
       href={href}
       style={{
         fontFamily: 'var(--font-primary)',
-        fontSize: '14px',
-        fontWeight: 600,
-        color: 'var(--color-bg-page)',
-        backgroundColor: 'var(--color-text-primary)',
+        fontSize: '13px',
+        fontWeight: 400,
+        color: 'var(--color-text-primary)',
+        backgroundColor: BG_DEFAULT,
+        border: `1px solid ${BORDER_DEFAULT}`,
         textDecoration: 'none',
         borderRadius: 'var(--radius-pill)',
-        padding: '0 1.5rem',
-        height: '44px',
+        padding: '0 0.875rem',
+        height: '32px',
         display: 'inline-flex',
         alignItems: 'center',
-        transition: 'opacity 0.15s ease',
+        transition: 'background-color 0.2s ease, border-color 0.2s ease',
       }}
-      onMouseEnter={e => { e.currentTarget.style.opacity = '0.85' }}
-      onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
+      onMouseEnter={e => {
+        e.currentTarget.style.backgroundColor = BG_HOVER
+        e.currentTarget.style.borderColor = BORDER_HOVER
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.backgroundColor = BG_DEFAULT
+        e.currentTarget.style.borderColor = BORDER_DEFAULT
+      }}
     >
       {children}
     </a>
@@ -104,15 +116,15 @@ function SecondaryPillButton({ href, children }) {
       href={href}
       style={{
         fontFamily: 'var(--font-primary)',
-        fontSize: '14px',
+        fontSize: '13px',
         fontWeight: 500,
         color: 'var(--color-text-primary)',
         backgroundColor: 'transparent',
         textDecoration: 'none',
         borderRadius: 'var(--radius-pill)',
         border: '1px solid var(--color-border-prominent)',
-        padding: '0 1.5rem',
-        height: '44px',
+        padding: '0 0.875rem',
+        height: '32px',
         display: 'inline-flex',
         alignItems: 'center',
         transition: 'border-color 0.15s ease',
