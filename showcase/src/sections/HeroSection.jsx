@@ -1,7 +1,9 @@
 import { useIntersectionReveal } from '@/hooks/useIntersectionReveal'
+import { useTypeMode } from '@/contexts/TypeModeContext.jsx'
 
 export function HeroSection() {
   const ref = useIntersectionReveal()
+  const { weights } = useTypeMode()
 
   return (
     <section
@@ -39,11 +41,12 @@ export function HeroSection() {
           style={{
             fontFamily: 'var(--font-primary)',
             fontSize: 'clamp(42px, 8vw, 72px)',
-            fontWeight: 400,
+            fontWeight: weights.h1,
             lineHeight: 1.0,
             color: 'var(--color-text-primary)',
             margin: '0 0 1.5rem',
             letterSpacing: '-0.02em',
+            transition: 'font-weight 150ms ease',
           }}
         >
           Every token.<br />Every component.
