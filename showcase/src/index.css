@@ -376,13 +376,24 @@ code, .code {
   min-height: 88px;
 }
 
-/* Switch — track + amber thumb on */
+/* Switch — gray track unchecked, deep-amber track checked, sliding light thumb. */
 [data-slot="switch"] {
   background-color: var(--color-border-prominent) !important;
 }
 
 [data-slot="switch"][data-state="checked"] {
-  background-color: var(--color-accent) !important;
+  background-color: var(--color-accent-deep) !important;
+}
+
+/* Thumb — Tailwind's `bg-background` doesn't resolve in BM's dark-only setup,
+   so set an explicit color and a smooth transform transition so the slide reads. */
+[data-slot="switch-thumb"] {
+  background-color: var(--color-text-primary) !important;
+  transition: transform var(--duration-translate) var(--ease-out) !important;
+}
+
+[data-slot="switch"][data-state="checked"] [data-slot="switch-thumb"] {
+  background-color: var(--color-text-primary) !important;
 }
 
 /* Skeleton — static, no animation (BM rule) */
