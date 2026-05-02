@@ -432,6 +432,47 @@ code, .code {
   fill: var(--color-accent) !important;
 }
 
+/* Badges — mirror the button variant color pattern (deep bg + alpha border).
+   Same brand pattern, just smaller. Hover applies only when rendered as a link. */
+[data-slot="badge"][data-variant="default"] {
+  background-color: var(--color-accent-deep) !important;
+  color: var(--color-text-primary) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 30%, transparent) !important;
+}
+
+[data-slot="badge"][data-variant="secondary"] {
+  background-color: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border-prominent) !important;
+}
+
+[data-slot="badge"][data-variant="destructive"] {
+  background-color: var(--color-error-deep) !important;
+  color: var(--color-text-primary) !important;
+  border-color: color-mix(in srgb, var(--color-error) 30%, transparent) !important;
+}
+
+[data-slot="badge"][data-variant="outline"] {
+  background-color: transparent !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border-prominent) !important;
+}
+
+a[data-slot="badge"][data-variant="default"]:hover {
+  background-color: color-mix(in srgb, var(--color-accent) 50%, transparent) !important;
+  border-color: var(--color-accent) !important;
+}
+
+a[data-slot="badge"][data-variant="secondary"]:hover {
+  background-color: var(--color-bg-card) !important;
+  border-color: var(--color-text-muted) !important;
+}
+
+a[data-slot="badge"][data-variant="destructive"]:hover {
+  background-color: color-mix(in srgb, var(--color-error) 50%, transparent) !important;
+  border-color: var(--color-error) !important;
+}
+
 /* Slider — gray track, amber range fill, light thumb with amber border.
    (Tailwind's bg-muted/bg-primary don't resolve in BM's setup, so without
    these the track and range are invisible.) */
