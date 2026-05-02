@@ -412,6 +412,22 @@ code, .code {
   fill: var(--color-accent) !important;
 }
 
+/* Slider — gray track, amber range fill, light thumb with amber border.
+   (Tailwind's bg-muted/bg-primary don't resolve in BM's setup, so without
+   these the track and range are invisible.) */
+[data-slot="slider-track"] {
+  background-color: var(--color-border-prominent) !important;
+}
+
+[data-slot="slider-range"] {
+  background-color: var(--color-accent) !important;
+}
+
+[data-slot="slider-thumb"] {
+  background-color: var(--color-text-primary) !important;
+  border-color: var(--color-accent) !important;
+}
+
 /* Skeleton — static, no animation (BM rule) */
 [data-slot="skeleton"] {
   animation: none !important;
