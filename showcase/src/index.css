@@ -396,6 +396,22 @@ code, .code {
   background-color: var(--color-text-primary) !important;
 }
 
+/* Radio — solid amber dot inside the ring (lucide's CircleIcon is stroked
+   by default, which reads as "circle inside a circle"; kill the stroke). */
+[data-slot="radio-group-item"] {
+  border-color: var(--color-border-prominent) !important;
+  background-color: transparent !important;
+}
+
+[data-slot="radio-group-item"][data-state="checked"] {
+  border-color: var(--color-accent) !important;
+}
+
+[data-slot="radio-group-indicator"] svg {
+  stroke: none !important;
+  fill: var(--color-accent) !important;
+}
+
 /* Skeleton — static, no animation (BM rule) */
 [data-slot="skeleton"] {
   animation: none !important;
