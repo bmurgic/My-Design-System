@@ -337,6 +337,26 @@ code, .code {
   border: 1px solid var(--color-border-prominent) !important;
 }
 
+/* Select / Dropdown / Popover content — Tailwind's bg-popover doesn't
+   resolve in BM's setup, leaving the dropdown panel transparent. Set an
+   elevated bg so it reads as a panel above the page. */
+[data-slot="select-content"],
+[data-slot="dropdown-menu-content"],
+[data-slot="popover-content"],
+[data-slot="hover-card-content"],
+[data-slot="command-dialog"],
+[data-slot="tooltip-content"] {
+  background-color: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Select / Dropdown items — subtle hover, not full-amber flash. */
+[data-slot="select-item"][data-highlighted],
+[data-slot="dropdown-menu-item"][data-highlighted] {
+  background-color: var(--color-bg-card) !important;
+  color: var(--color-text-primary) !important;
+}
+
 /* Dialog / AlertDialog — BM radius */
 [data-slot="dialog-content"],
 [data-slot="alert-dialog-content"] {
