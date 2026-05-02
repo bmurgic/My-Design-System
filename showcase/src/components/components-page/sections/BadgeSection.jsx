@@ -6,7 +6,10 @@ const CODE = `import { Badge } from '@/components/ui/badge'
 <Badge>Default</Badge>
 <Badge variant="secondary">Secondary</Badge>
 <Badge variant="outline">Outline</Badge>
-<Badge variant="destructive">Destructive</Badge>`
+<Badge variant="destructive">Destructive</Badge>
+<Badge variant="info">Info</Badge>
+<Badge variant="violet">Violet</Badge>
+<Badge variant="green">Green</Badge>`
 
 export function BadgeSection() {
   return (
@@ -21,6 +24,9 @@ export function BadgeSection() {
       <Badge variant="secondary">Secondary</Badge>
       <Badge variant="outline">Outline</Badge>
       <Badge variant="destructive">Destructive</Badge>
+      <Badge variant="info">Info</Badge>
+      <Badge variant="violet">Violet</Badge>
+      <Badge variant="green">Green</Badge>
     </ComponentSection>
   )
 }

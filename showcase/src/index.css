@@ -48,7 +48,12 @@
   --color-error-deep: hsl(0, 70%, 22%);       /* ≈ #5F1E1E — deep red bg for destructive */
   --color-warning: #fbbf24;
   --color-success: #34d399;
-  --color-info: #60a5fa;
+  --color-info: #38bdf8;                      /* light sky blue (sky-400) */
+  --color-info-deep: hsl(199, 89%, 19%);      /* deep sky */
+  --color-violet: #a78bfa;                    /* violet-400 */
+  --color-violet-deep: hsl(254, 70%, 22%);    /* deep violet */
+  --color-green: #4ade80;                     /* green-400 (pure, brighter than emerald) */
+  --color-green-deep: hsl(142, 71%, 18%);     /* deep green */
 
   --spacing-section: 96px;
   --spacing-section-lg: 128px;
@@ -81,7 +86,12 @@
   --color-error-deep: hsl(0, 70%, 22%);       /* ≈ #5F1E1E — deep red bg for destructive */
   --color-warning: #fbbf24;
   --color-success: #34d399;
-  --color-info: #60a5fa;
+  --color-info: #38bdf8;                      /* light sky blue (sky-400) */
+  --color-info-deep: hsl(199, 89%, 19%);      /* deep sky */
+  --color-violet: #a78bfa;                    /* violet-400 */
+  --color-violet-deep: hsl(254, 70%, 22%);    /* deep violet */
+  --color-green: #4ade80;                     /* green-400 (pure, brighter than emerald) */
+  --color-green-deep: hsl(142, 71%, 18%);     /* deep green */
   --font-primary: 'Figtree', 'DM Sans', 'Helvetica Neue', sans-serif;
   --font-mono: 'Dank Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
   --radius-sm: 6px;
@@ -402,7 +412,7 @@ code, .code {
 }
 
 [data-slot="switch"][data-state="checked"] {
-  background-color: var(--color-accent-deep) !important;
+  background-color: var(--color-accent) !important;
 }
 
 /* Thumb — Tailwind's `bg-background` doesn't resolve in BM's dark-only setup,
@@ -458,6 +468,24 @@ code, .code {
   border-color: var(--color-border-prominent) !important;
 }
 
+[data-slot="badge"][data-variant="info"] {
+  background-color: var(--color-info-deep) !important;
+  color: var(--color-text-primary) !important;
+  border-color: color-mix(in srgb, var(--color-info) 30%, transparent) !important;
+}
+
+[data-slot="badge"][data-variant="violet"] {
+  background-color: var(--color-violet-deep) !important;
+  color: var(--color-text-primary) !important;
+  border-color: color-mix(in srgb, var(--color-violet) 30%, transparent) !important;
+}
+
+[data-slot="badge"][data-variant="green"] {
+  background-color: var(--color-green-deep) !important;
+  color: var(--color-text-primary) !important;
+  border-color: color-mix(in srgb, var(--color-green) 30%, transparent) !important;
+}
+
 a[data-slot="badge"][data-variant="default"]:hover {
   background-color: color-mix(in srgb, var(--color-accent) 50%, transparent) !important;
   border-color: var(--color-accent) !important;
@@ -471,6 +499,21 @@ a[data-slot="badge"][data-variant="secondary"]:hover {
 a[data-slot="badge"][data-variant="destructive"]:hover {
   background-color: color-mix(in srgb, var(--color-error) 50%, transparent) !important;
   border-color: var(--color-error) !important;
+}
+
+a[data-slot="badge"][data-variant="info"]:hover {
+  background-color: color-mix(in srgb, var(--color-info) 50%, transparent) !important;
+  border-color: var(--color-info) !important;
+}
+
+a[data-slot="badge"][data-variant="violet"]:hover {
+  background-color: color-mix(in srgb, var(--color-violet) 50%, transparent) !important;
+  border-color: var(--color-violet) !important;
+}
+
+a[data-slot="badge"][data-variant="green"]:hover {
+  background-color: color-mix(in srgb, var(--color-green) 50%, transparent) !important;
+  border-color: var(--color-green) !important;
 }
 
 /* Slider — gray track, amber range fill, light thumb with amber border.
