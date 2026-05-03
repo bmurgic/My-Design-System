@@ -2,8 +2,8 @@ import { ButtonSection } from './sections/ButtonSection.jsx'
 import { InputSection } from './sections/InputSection.jsx'
 import { TextareaSection } from './sections/TextareaSection.jsx'
 import { LabelSection } from './sections/LabelSection.jsx'
-import { CheckboxSection } from './sections/CheckboxSection.jsx'
-import { RadioGroupSection } from './sections/RadioGroupSection.jsx'
+import { CheckboxSection, CheckboxCardsSection } from './sections/CheckboxSection.jsx'
+import { RadioGroupSection, RadioGroupCardsSection } from './sections/RadioGroupSection.jsx'
 import { SwitchSection } from './sections/SwitchSection.jsx'
 import { SliderSection } from './sections/SliderSection.jsx'
 import { SelectSection } from './sections/SelectSection.jsx'
@@ -47,7 +47,9 @@ export const COMPONENT_REGISTRY = [
       { slug: 'textarea', label: 'Textarea', Component: TextareaSection },
       { slug: 'label', label: 'Label', Component: LabelSection },
       { slug: 'checkbox', label: 'Checkbox', Component: CheckboxSection },
+      { slug: 'checkbox-cards', label: 'Checkbox — Cards', Component: CheckboxCardsSection },
       { slug: 'radio-group', label: 'Radio Group', Component: RadioGroupSection },
+      { slug: 'radio-group-cards', label: 'Radio Group — Cards', Component: RadioGroupCardsSection },
       { slug: 'switch', label: 'Switch', Component: SwitchSection },
       { slug: 'slider', label: 'Slider', Component: SliderSection },
       { slug: 'select', label: 'Select', Component: SelectSection },

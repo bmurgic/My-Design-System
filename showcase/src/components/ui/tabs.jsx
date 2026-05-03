@@ -39,19 +39,81 @@ const tabsListVariants = cva(
 function TabsList({
   className,
   variant = "default",
+  size = "default",
+  children,
   ...props
 }) {
+  const listRef = React.useRef(null)
+  const mountedRef = React.useRef(false)
+
+  React.useEffect(() => {
+    if (variant !== "default") return
+    const list = listRef.current
+    if (!list) return
+
+    const updateIndicator = () => {
+      const active = list.querySelector('[data-slot="tabs-trigger"][data-state="active"]')
+      if (!active) {
+        list.style.setProperty("--tab-indicator-w", "0px")
+        list.style.setProperty("--tab-indicator-h", "0px")
+        return
+      }
+      list.style.setProperty("--tab-indicator-x", `${active.offsetLeft}px`)
+      list.style.setProperty("--tab-indicator-y", `${active.offsetTop}px`)
+      list.style.setProperty("--tab-indicator-w", `${active.offsetWidth}px`)
+      list.style.setProperty("--tab-indicator-h", `${active.offsetHeight}px`)
+      if (!mountedRef.current) {
+        // Two RAFs so the first measurement paints before the transition is enabled.
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            list.setAttribute("data-mounted", "true")
+            mountedRef.current = true
+          })
+        })
+      }
+    }
+
+    updateIndicator()
+
+    const mutationObserver = new MutationObserver(updateIndicator)
+    mutationObserver.observe(list, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["data-state"],
+    })
+
+    const resizeObserver = new ResizeObserver(updateIndicator)
+    resizeObserver.observe(list)
+    list.querySelectorAll('[data-slot="tabs-trigger"]').forEach((trigger) => {
+      resizeObserver.observe(trigger)
+    })
+
+    return () => {
+      mutationObserver.disconnect()
+      resizeObserver.disconnect()
+    }
+  }, [variant])
+
   return (
     <TabsPrimitive.List
+      ref={listRef}
       data-slot="tabs-list"
       data-variant={variant}
+      data-size={size}
       className={cn(tabsListVariants({ variant }), className)}
-      {...props} />
+      {...props}>
+      {variant === "default" ? (
+        <span data-slot="tabs-indicator" aria-hidden="true" />
+      ) : null}
+      {children}
+    </TabsPrimitive.List>
   );
 }
 
 function TabsTrigger({
   className,
+  icon,
+  children,
   ...props
 }) {
   return (
@@ -64,7 +126,10 @@ function TabsTrigger({
         "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-[orientation=horizontal]/tabs:after:inset-x-0 group-data-[orientation=horizontal]/tabs:after:bottom-[-5px] group-data-[orientation=horizontal]/tabs:after:h-0.5 group-data-[orientation=vertical]/tabs:after:inset-y-0 group-data-[orientation=vertical]/tabs:after:-right-1 group-data-[orientation=vertical]/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-[state=active]:after:opacity-100",
         className
       )}
-      {...props} />
+      {...props}>
+      {icon ? <span data-slot="tabs-trigger-icon" aria-hidden="true">{icon}</span> : null}
+      {children}
+    </TabsPrimitive.Trigger>
   );
 }
 
